@@ -1,0 +1,6 @@
+# Ignores .exe files
+**/*.exe
+# Ignores first_code.cpp because its an experimental file
+first_code.cpp
+# Ignores .vscode
+**/.vscode
