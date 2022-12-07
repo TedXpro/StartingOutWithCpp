@@ -1,2 +1,2 @@
 # StartingOutWithCpp
-This repository contains I wrote will studying Starting out with Cpp from control structures through objects by Tony Gaddis   
+This repository contains codes I wrote while studying the book `Starting Out With C++ From Control Structures Through Objects` by `Tony Gaddis`.   
