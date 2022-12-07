@@ -33,10 +33,13 @@ void vectorAddition(int vec1[], int vec2[], int size)
 int main()
 {   
     char ch;
+    cout << "\t\t\tVector Addition and Dot Product" << endl;
+    cout << "Welcome" << endl;
+    cout << "This program calculates Vector Addition and Dot product of two vectors based on your input.\n\n";
     do
     {
         int choice;
-        cout << "choose: " << endl;
+        cout << "Please Enter your choice from the following:" << endl;
         cout << "1. vector Addition" << endl;
         cout << "2. Dot Product" << endl;
         cout << "3. Both" << endl;
