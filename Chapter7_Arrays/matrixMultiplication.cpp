@@ -1,5 +1,5 @@
 /*This program will take in two matrices from the user,
-multiplies the matrices and displays the result*/
+multiplies the matrices and displays the result.*/
 #include <iostream>
 #include <iomanip>
 
@@ -22,7 +22,7 @@ int main()
     cout << "Enter the number of columns of the second matrix: ";
     cin >> cols_2;
 
-    while (cols_1 != rows_2)         
+    while (cols_1 != rows_2)
     {
         /*For matrix multiplication the number of columns of the first matrix
         and the number of rows of the second matrix MUST be the same.*/
@@ -38,9 +38,9 @@ int main()
 
     // Accept the elements of the first matrix.
     cout << "Enter the elements of the first matrix:\n";
-    for (int i = 0; i < rows_1; i++)    //   Controls the rows of the matrix.
+    for (int i = 0; i < rows_1; i++) //   Controls the rows of the matrix.
     {
-        for (int j = 0; j < cols_1; j++)     //    Controls the columns of the matrix.
+        for (int j = 0; j < cols_1; j++) //    Controls the columns of the matrix.
         {
             cout << "Enter the " << i << " " << j << " element: ";
             cin >> matrix1[i][j];
@@ -49,9 +49,9 @@ int main()
 
     // Accept the elements of the second matrix.
     cout << "Enter the elements of the second matrix:\n";
-    for (int i = 0; i < rows_2; i++)           //   Controls the rows of the matrix.
+    for (int i = 0; i < rows_2; i++) //   Controls the rows of the matrix.
     {
-        for (int j = 0; j < cols_2; j++)       //   Controls the columns of the matrix.
+        for (int j = 0; j < cols_2; j++) //   Controls the columns of the matrix.
         {
             cout << "Enter the " << i << " " << j << " element: ";
             cin >> matrix2[i][j];
@@ -59,12 +59,12 @@ int main()
     }
 
     // Multiplying the two matrices
-    for (int i = 0; i < rows_1; i++)   //  i controls the rows of the first matrix.
+    for (int i = 0; i < rows_1; i++) //  i controls the rows of the first matrix.
     {
-        for (int j = 0; j < cols_2; j++)   //  j controls the columns of the second matrix.
+        for (int j = 0; j < cols_2; j++) //  j controls the columns of the second matrix.
         {
-            product[i][j] = 0;    //    each element of the product is initiallized first.
-            for (int k = 0; k < cols_1; k++)      //  k controls the COLUMNS of the first matrix and the ROWS of the second matrix.
+            product[i][j] = 0;               //    each element of the product is initiallized first.
+            for (int k = 0; k < cols_1; k++) //  k controls the COLUMNS of the first matrix and the ROWS of the second matrix.
             {
                 product[i][j] += matrix1[i][k] * matrix2[k][j];
             }
@@ -75,11 +75,23 @@ int main()
     cout << "(";
     for (int i = 0; i < rows_1; i++)
     {
-        for (int j = 0; j < cols_2; j++)
+        if (i == (rows_1 - 1))
         {
-            cout << product[i][j] << " ";
+            for (int j = 0; j < cols_2; j++)
+            {
+                if (j == (cols_2 - 1))
+                {
+                    cout << product[i][j] << ")";
+                    break;
+                }
+                cout << product[i][j] << "   ";
+            }
+        }
+        else
+        {
+            for (int j = 0; j < cols_2; j++)
+                cout << product[i][j] << "   ";
         }
         cout << endl;
     }
-    cout << ")";
 }
