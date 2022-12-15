@@ -16,7 +16,7 @@ int main()
     do
     {
         int size;
-        cout << "Enter the number of integers that will be given: ";
+        cout << "Enter the number of integers: ";
         cin >> size;
 
         int *numbers = nullptr;
@@ -89,7 +89,6 @@ int *findMode(int *numbers, int *size)
     int mode;             // To hold the mode of the numbers.
     for (int i = 0; i < (*size - 1); i++)
     {
-        int k = i; //  To change to the next different number
         int num = numbers[i];
         int counter = 0; // To count the number of times a number occured.
         for (int j = i + 1; j < *size; j++)
@@ -98,12 +97,11 @@ int *findMode(int *numbers, int *size)
             {
                 counter++; //  To count how many times each different number occured.
                 mostNum = numbers[j];
-                k++;
+                i++;
             }
             else
                 break;
         }
-        i = k;
         if (++counter > modeCounter)
         {
             modeCounter = counter;
