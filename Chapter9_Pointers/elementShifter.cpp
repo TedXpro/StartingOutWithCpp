@@ -1,3 +1,6 @@
+/*Programming Challenge- Chapter 9, Question 12 page 546.
+This program accepts numbers and the size and shifts the
+array to the left by one by assigning the first element to be zero.*/
 #include <iostream>
 #include <memory>
 
@@ -16,7 +19,7 @@ int main()
 
     int *ptr = nullptr;
     ptr = acceptelements(arrSize);
-    
+
     int *shiftptr = nullptr;
     shiftptr = shiftArray(ptr, arrSize);
 
@@ -28,9 +31,12 @@ int main()
     shiftptr = nullptr;
 }
 
+/**
+ * This function will accept the numbers.
+ */
 int *acceptelements(int size)
 {
-    int *arr = new int[size];
+    int *arr = new int[size]; // Initiallizing a dynamic array.
     for (int i = 0; i < size; i++)
     {
         cout << "Enter element #" << (i + 1) << ": ";
@@ -39,9 +45,12 @@ int *acceptelements(int size)
     return arr;
 }
 
+/**
+ * This function will shift the elements by one to the left.
+ */
 int *shiftArray(int *arr, int size)
 {
-    int *shiftArr = new int[size + 1];
+    int *shiftArr = new int[size + 1]; // Initializing a dynamic array.
     for (int i = 0; i < size + 1; i++)
     {
         if (i == 0)
@@ -52,13 +61,16 @@ int *shiftArray(int *arr, int size)
     return shiftArr;
 }
 
+/**
+ * This function will display both the original and the new array.
+ */
 void displayArray(int *arr, int *shiftArr, int size)
 {
     // display the array before it was shifted.
     cout << "The array before it was shifted one element:\n";
     for (int i = 0; i < size; i++)
         cout << arr[i] << " ";
-    
+
     // display the array after it was shifted.
     cout << "The array after it was shifted one element:\n";
     for (int i = 0; i < size + 1; i++)
