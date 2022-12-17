@@ -21,11 +21,15 @@ int main()
     int rotate; // to hold the number of times the array is going to be rotated.
     cout << "How many times do you want to rotate the set: ";
     cin >> rotate;
-
-    // rotate the numbers.
-    rotateNumbers(numbers, size, rotate);
-    // display the result.
-    displayResult(numbers, size, rotate);
+    if (size == 1)
+        cout << numbers[0];
+    else
+    { 
+        // rotate the numbers.
+        rotateNumbers(numbers, size, rotate);
+        // display the result.
+        displayResult(numbers, size, rotate);
+    }
 
     return 0;
 }
