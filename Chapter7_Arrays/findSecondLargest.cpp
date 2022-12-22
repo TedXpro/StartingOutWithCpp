@@ -3,105 +3,73 @@
 using namespace std;
 
 void acceptNumbers(int[], int);
-void copyNumbers(int[], int[], int);
-void sortNumbers(int[], int);
 int findSecondLargest(int[], int);
-void displayAnswer(int[], int, int);
+void displayResult(int[], int, int);
 
 int main()
 {
-    int size;
+    int arrSize;
     cout << "Enter the size of the array: ";
-    cin >> size;
-    while (size < 0)
+    cin >> arrSize;
+    while (arrSize < 0)
     {
-        cout << "Please Enter the size of the array greater than 1\n";
+        cout << "The size of the array must be greater than 1.\n";
         cout << "Enter the size of the array: ";
-        cin >> size;
+        cin >> arrSize;
     }
-    int numbers[size], numbersCopy[size];
 
-    acceptNumbers(numbers, size);
-    copyNumbers(numbers, numbersCopy, size);
-    sortNumbers(numbersCopy, size);
+    int numbers[arrSize];
+    acceptNumbers(numbers, arrSize);
 
-    int secondLargest;
-    secondLargest = findSecondLargest(numbersCopy, size);
+    int answer;
+    answer = findSecondLargest(numbers, arrSize);
 
-    displayAnswer(numbers, size, secondLargest);
+    displayResult(numbers, arrSize, answer);
 }
 
 /**
  * This function will accept the numbers from the user.
  */
-void acceptNumbers(int numbers[], int arrSize)
+void acceptNumbers(int nums[], int size)
 {
-    for (int i = 0; i < arrSize; i++)
+    for (int i = 0; i < size; i++)
     {
         cout << "Enter element #" << (i + 1) << ": ";
-        cin >> numbers[i];
+        cin >> nums[i];
     }
 }
 
 /**
- * This function will copy the existing set of numbers into
- * another array.
+ * This function will find the second largest number
+ * from the set of given numbers.
  */
-void copyNumbers(int nums[], int numsCopy[], int arrSize)
+int findSecondLargest(int nums[], int size)
 {
-    for (int i = 0; i < arrSize; i++)
-        numsCopy[i] = nums[i];
-}
-
-/**
- * This function will sort the numbers in ascending order.
- */
-void sortNumbers(int nums[], int arrSize)
-{
-    int minValue, minIndex;
-    for (int i = 0; i < (arrSize - 1); i++)
-    {
-        minValue = nums[i];
-        minIndex = i;
-        for (int j = i + 1; j < arrSize; j++)
-        {
-            if (nums[j] < minValue)
-            {
-                minValue = nums[j];
-                minIndex = j;
-            }
-        }
-        nums[minIndex] = nums[i];
-        nums[i] = minValue;
-    }
-}
-
-/**
- * This function will find the second largest number in the set.
- */
-int findSecondLargest(int nums[], int arrSize)
-{
-    int max = nums[arrSize - 1];
+    int counter;
     int secondLargest;
-    for (int i = (arrSize - 2); i > 0; i--)
+    for (int i = 0; i < size; i++)
     {
-        if (nums[i] < max)
+        counter = 0;
+        secondLargest = nums[i];
+        for (int j = 0; j < size; j++)
         {
-            secondLargest = nums[i];
-            break;
+            if (secondLargest < nums[j])
+                counter++;
         }
+        if (counter == 1)
+            break;
     }
     return secondLargest;
 }
 
 /**
- * This function will display the result of the program.
+ * This function will display the result.
  */
-void displayAnswer(int nums[], int arrSize, int secondLargest)
+void displayResult(int nums[], int size, int ans)
 {
-    cout << "The second largest number in the set:\n";
-    for (int i = 0; i < arrSize; i++)
+    cout << "The second largest number form the set:\n";
+    for (int i = 0; i < size; i++)
         cout << nums[i] << " ";
     cout << endl;
-    cout << "Second Largest Number: " << secondLargest << endl;
+    cout << "Second largest number: " << ans << endl;
 }
