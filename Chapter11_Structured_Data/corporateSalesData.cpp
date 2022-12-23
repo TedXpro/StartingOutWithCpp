@@ -24,9 +24,9 @@ int main()
     eastInfo = acceptData();
     eastInfo = calData(eastInfo);
 
-    westInfo= acceptData();
-    westInfo= calData(westInfo);
-    
+    westInfo = acceptData();
+    westInfo = calData(westInfo);
+
     northInfo = acceptData();
     northInfo = calData(northInfo);
 
@@ -47,7 +47,6 @@ CompanyDivision acceptData()
     cin >> info.divisionName;
 
     cout << "Enter the first quarterly sale: ";
-    cin.ignore();
     cin >> info.firstQuarterSales;
 
     cout << "Enter the second quarterly sale: ";
