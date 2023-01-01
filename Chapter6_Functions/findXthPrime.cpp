@@ -20,18 +20,25 @@ int main()
         {
             counter--;
             if (counter == 0)
-                break;
-            else
-                num++;
+                continue;
         }
-        else
-            num++;
+        num++;
     }
-    cout << "The " << xth << "th prime number is: " << num << endl;
+    if (xth == 1)
+        cout << "The first prime number is: " << num << endl;
+    else if (xth == 2)
+        cout << "The second prime number is: " << num << endl;
+    else if (xth == 3)
+        cout << "The third prime number is: " << num << endl;
+    else
+        cout << "The " << xth << "th prime number is: " << num << endl;
 }
 
 /**
- * This function will test whether a number is prime or not.
+ * Checks if its prime or not.
+ *
+ * @param values Container whose values are checked if divisible by numbers.
+ * @return 1 or 0, if `value` is prime returns 1 if not returns 0.
  */
 bool checkPrime(int number)
 {
