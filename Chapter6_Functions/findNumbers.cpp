@@ -20,14 +20,20 @@ int main()
     cout << "Enter the number: ";
     cin >> n;
 
+    int counter = 0;
     for (int i = 0; i < (size - 1); i++)
     {
         for (int j = i + 1; j < size; j++)
         {
             if (checkNumbers(numbers[i], numbers[j], n))
+            {
                 cout << numbers[i] << " " << numbers[j] << endl;
+                counter++;
+            }
         }
     }
+    if (counter == 0)
+        cout << "There is no number that can add up to give the number " << n << endl;
 }
 
 /**
