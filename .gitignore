@@ -4,3 +4,7 @@
 first_code.cpp
 # Ignores .vscode
 **/.vscode
+# Ignores the Rectangle.h file
+Rectangle.h
+# Ignores the Rectangle.cpp file
+Rectangle.cpp
