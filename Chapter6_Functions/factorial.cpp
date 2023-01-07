@@ -40,7 +40,7 @@ int acceptNumber()
 int findFactorial(int num)
 {
     if (num < 0)
-        cout << "The number u entered is a negative number.\n";
+        return 0;
     else if (num == 0 || num == 1)
         return 1;
     return num * findFactorial(num - 1);
@@ -54,5 +54,8 @@ int findFactorial(int num)
  */
 void displayResult(int num, int fact)
 {
-    cout << "The factorial of the number " << num << " is " << fact << endl;
+    if (fact == 0)
+        cout << "The number you entered is negative.\n";
+    else
+        cout << "The factorial of " << num << " is " << fact << endl;
 }
