@@ -5,26 +5,19 @@ using namespace std;
 
 /**
  * Setting the value of the num from the user to number.
- * 
+ *
  * @param num is the number recieved from the user.
-*/
+ */
 void Prime::setNumber(int num)
 {
-    if (num >= 0)
-    {
-        number = num;
-    }
-    else
-    {
-        cout << "The number u entered is less than zero.\n";
-    }
+    number = num;
 }
 
 /**
  * Check if the number is prime or composite.
- * 
+ *
  * @param number is the number to be checked.
-*/
+ */
 void Prime::checkPrime() const
 {
     if (number == 0 || number == 1)

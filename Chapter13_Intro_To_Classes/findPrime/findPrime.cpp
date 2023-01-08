@@ -12,6 +12,11 @@ int main()
         Prime integer;
         cout << "Enter a number: ";
         cin >> n;
+        if (n < 0)
+        {
+            cout << "The number you entered is a negative number.\n";
+            continue;
+        }
         integer.setNumber(n);
         integer.checkPrime();
 
