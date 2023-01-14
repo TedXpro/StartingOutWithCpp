@@ -8,4 +8,4 @@ Prime.o: Prime.cpp Prime.h
 	g++ -c Prime.cpp
 
 clean: 
-	rm *.o output
+	rm *.o output.exe
