@@ -8,3 +8,5 @@ first_code.cpp
 Rectangle.h
 # Ignores the Rectangle.cpp file
 Rectangle.cpp
+# Ignores .o files
+**/*.o
