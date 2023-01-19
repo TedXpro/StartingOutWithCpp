@@ -10,7 +10,7 @@ int main()
 {
     string str; // will hold the string but are numbers separated by comma.
     cout << "Enter the string: ";
-    cin >> str;   // 23,4,56
+    cin >> str; 
 
     vector<string> stringList;
     stringList = separateString(str);
@@ -33,7 +33,6 @@ vector<string> separateString(string answer)
     int count = 0;
     while (count < answer.size() )
     {
-        // answer = "23,4,56"
         string ans;
         while (answer[count] != ch)
         {
@@ -42,7 +41,6 @@ vector<string> separateString(string answer)
             if (count == answer.size() )
                 break;
         }
-        // cout << ans << endl;
         count++;
         separate.push_back(ans);
     return separate;
