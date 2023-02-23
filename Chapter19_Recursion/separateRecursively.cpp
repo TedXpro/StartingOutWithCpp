@@ -5,6 +5,7 @@ using namespace std;
 
 int acceptNumber();
 void extract(int, vector<int> *);
+void display(vector<int> *);
 
 int main()
 {
@@ -13,10 +14,7 @@ int main()
     vector<int> separate;
 
     extract(number, &separate);
-
-    for (int i = separate.size() - 1; i >= 0; i--)
-        cout << separate[i] << " ";
-    cout << endl;
+    display(&separate);
 }
 
 /**
@@ -48,4 +46,16 @@ void extract(int num, vector<int> *sep)
         (*sep).push_back(num % 10);
         extract(num / 10, sep);
     }
+}
+
+/**
+ * This function will display the result.
+ * 
+ * @param sep holds the separated numbers. 
+*/
+void display(vector<int> *sep)
+{
+    for (int i = (*sep).size()- 1; i >= 0; i--)
+        cout << (*sep)[i] << " ";
+    cout << endl;
 }
