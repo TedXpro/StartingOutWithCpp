@@ -1,0 +1,17 @@
+# How to create a make file:
+// mainProgram.cpp is the one that contains the main function.
+// program.cpp is the one that contains the implementation file i.e one that contains the member functions.
+// program.h is the one that contains the class declaration.
+
+mainProgram.exe: mainProgram.o program.o 
+    g++ mainProgram.o program.o -o mainProgram.exe
+
+mainProgram.o: mainProgram.cpp  // to compile the main program file
+    g++ -c mainProgram.cpp
+
+program.o: program.cpp program.h // to compile the implementation file(one that contains the member functions).
+    g++ -c program.cpp
+
+clean:
+    rm *.o mainProgram.exe // to remove .o files and the executable file 
+    // to remove TYPE `make clean`
