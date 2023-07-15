@@ -1,5 +1,5 @@
 #include <iostream>
-#include "NumberList.h"
+#include "LinkedList.h"
 
 using namespace std;
 
@@ -7,7 +7,8 @@ using namespace std;
  * destroying the linked list
  * deleting all the elements of the linked list.
 */
-NumberList::~NumberList(){
+template<class T>
+LinkedList<T>::~LinkedList(){
     ListNode *nodePtr;
     ListNode *nextNode;
 
@@ -26,7 +27,8 @@ NumberList::~NumberList(){
  * This function appends a new node to the linked list.
  * @param number holds the value of the new element.
  */
-void NumberList::appendNode(double number)
+template<class T>
+void LinkedList<T>::appendNode(T number)
 {
     ListNode *newNode;
     ListNode *nodePtr;
@@ -53,7 +55,8 @@ void NumberList::appendNode(double number)
 /**
  * this function displays all the elements of the linked list;
  */
-void NumberList::displayList() const
+template <class T>
+void LinkedList<T>::displayList() const
 {
     ListNode *nodePtr;
 
@@ -71,7 +74,8 @@ void NumberList::displayList() const
  * the order of the numbers in the linked list.
  * @param number holds the new number to be inserted to the linked list.
  */
-void NumberList::insertNode(double number)
+template <class T>
+void LinkedList<T>::insertNode(T number)
 {
     ListNode *newNode;
     ListNode *nodePtr;
@@ -113,7 +117,8 @@ void NumberList::insertNode(double number)
  * this function deletes a node from the linked list
  * @param number holds the number to be deleted from the linked list.
  */
-void NumberList::deleteNode(double number)
+template <class T>
+void LinkedList<T>::deleteNode(T number)
 {
     ListNode *previousNode;
     ListNode *nodePtr;

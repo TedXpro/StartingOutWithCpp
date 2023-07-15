@@ -1,11 +1,11 @@
-output.exe: mainDemo.o NumberList.o
-	g++ mainDemo.o NumberList.o -o output.exe
+output.exe: mainDemo.o LinkedList.o
+	g++ mainDemo.o LinkedList.o -o output.exe
 
 mainDemo.o: mainDemo.cpp
 	g++ -c mainDemo.cpp
 
-NumberList.o: NumberList.cpp NumberList.h
-	g++ -c NumberList.cpp
+LinkedList.o: LinkedList.cpp LinkedList.h
+	g++ -c LinkedList.cpp
 
 clean:
 	rm *.o output.exe

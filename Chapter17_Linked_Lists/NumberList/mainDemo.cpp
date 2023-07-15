@@ -1,11 +1,11 @@
 #include <iostream>
-#include "NumberList.h"
+#include "LinkedList.h"
 
 using namespace std;
 
 int main()
 {
-    NumberList list;
+    LinkedList<> list;
 
     list.appendNode(2);
     list.appendNode(3);
