@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    LinkedList<> list;
+    LinkedList<int> list;
 
     list.appendNode(2);
     list.appendNode(3);
