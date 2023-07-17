@@ -33,30 +33,85 @@ public:
     int size();
 };
 
+int menu();
+
 int main()
 {
+    int choice = menu();
+
+    if (choice == 5)
+    {
+        cout << "thank you for using!\n";
+        return 0;
+    }
+
     IntQueue numberQueue;
-    numberQueue.enqueue(10);
-    numberQueue.enqueue(20);
-    numberQueue.enqueue(30);
-    numberQueue.enqueue(40);
-    numberQueue.enqueue(50);
-    numberQueue.enqueue(60);
+    do
+    {
+        if (choice == 1)
+        {
+            cout << "Enter number: ";
+            cin >> choice;
+            numberQueue.enqueue(choice);
+        }
+        else if (choice == 2)
+        {
+            try
+            {
+                choice = numberQueue.dequeue();
+                cout << choice << " has been removed from queue.\n\n";
+            }
+            catch (IntQueue::EmptyQueue)
+            {
+                cout << "The Stack is EMPTY!\n\n";
+            }
+        }
+        else if (choice == 3)
+        {
+            try
+            {
+                choice = numberQueue.peak();
+                cout << "The element at the front of the queue is " << choice << endl
+                     << endl;
+            }
+            catch (IntQueue::EmptyQueue)
+            {
+                cout << "The Stack is EMPTY!!\n\n";
+            }
+        }
+        else
+        {
+            choice = numberQueue.size();
+            cout << "The size of the queue is " << choice << endl
+                 << endl;
+        }
 
-    int number  = numberQueue.peak();
-    cout << "front of queue " << number << endl;
-    number = numberQueue.size();
-    cout << "the queue has " << number << " elements\n";
+        choice = menu();
+    } while (choice != 5);
 
-    number = numberQueue.dequeue();
-    cout << number << " has been removed from front of queue\n";
-    number = numberQueue.dequeue();
-    cout << number << " has been removed from front of queue\n";
+    cout << "Thank you for using!!\n";
+    return 0;
+}
 
-    number = numberQueue.peak();
-    cout << "front of queue " << number << endl;
-    number = numberQueue.size();
-    cout << "the queue has " << number << " elements\n";
+int menu()
+{
+    int choice;
+    cout << "Welcome to Queue's!\n";
+    cout << "1. Enqueue\n";
+    cout << "2. Dequeue\n";
+    cout << "3. Peak in queue\n";
+    cout << "4. Size of queue\n";
+    cout << "5. Exit\n";
+    cout << "Enter your choice: ";
+    cin >> choice;
+
+    while (choice >= 6 || choice < 1)
+    {
+        cout << "Enter between 1- 5: ";
+        cin >> choice;
+    }
+
+    return choice;
 }
 
 void IntQueue::enqueue(int number)
@@ -82,7 +137,7 @@ void IntQueue::enqueue(int number)
         queueSize++;
     }
 
-    cout << number << " has been added to the queue.\n";
+    cout << number << " has been added to the queue.\n\n";
 }
 
 int IntQueue::dequeue()
@@ -104,6 +159,8 @@ int IntQueue::dequeue()
 
 int IntQueue::peak()
 {
+    if (top == nullptr)
+        throw EmptyQueue();
     return top->value;
 }
 
