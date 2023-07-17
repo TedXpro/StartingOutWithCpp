@@ -92,6 +92,12 @@ int menu()
     cout << "Enter your choice: ";
     cin >> choice;
 
+    while(choice >=6 || choice < 1)
+    {
+        cout << "Enter between 1- 5: ";
+        cin >> choice;
+    }
+
     return choice;
 }
 
