@@ -1,7 +1,89 @@
-#include "IntBinaryTree.h"
 #include <iostream>
 
 using namespace std;
+
+class IntBinaryTree
+{
+private:
+    struct TreeNode
+    {
+        int value;
+        TreeNode *left;
+        TreeNode *right;
+    };
+
+    TreeNode *root;
+
+    void insert(TreeNode *&, TreeNode *&);
+    void destroySubTree(TreeNode *&);
+    void deleteNode(int, TreeNode *&);
+    void makeDeletion(TreeNode *&);
+    void displayInOrder(TreeNode *) const;
+    void displayPreOrder(TreeNode *) const;
+    void displayPostOrder(TreeNode *) const;
+
+public:
+    IntBinaryTree()
+    {
+        root = nullptr;
+    }
+
+    ~IntBinaryTree()
+    {
+        destroySubTree(root);
+    }
+
+    void insertNode(int);
+    bool searchNode(int);
+    void remove(int);
+    void displayInOrder() const
+    {
+        displayInOrder(root);
+    }
+
+    void displayPreOrder() const
+    {
+        displayPreOrder(root);
+    }
+
+    void displayPostOrder() const
+    {
+        displayPostOrder(root);
+    }
+};
+
+int main()
+{
+    IntBinaryTree binaryNumber;
+
+    binaryNumber.remove(0);
+
+    binaryNumber.insertNode(5);
+    binaryNumber.insertNode(2);
+    binaryNumber.insertNode(1);
+    binaryNumber.insertNode(4);
+    binaryNumber.insertNode(3);
+    binaryNumber.insertNode(8);
+    binaryNumber.insertNode(7);
+    binaryNumber.insertNode(11);
+    binaryNumber.insertNode(13);
+    binaryNumber.insertNode(20);
+    binaryNumber.insertNode(12);
+ 
+    cout << "\ndisplaying in order\n";
+    binaryNumber.displayInOrder();
+ 
+    binaryNumber.remove(0);
+    // binaryNumber.insertNode(0);
+    cout << "\ndisplaying in order\n";
+    binaryNumber.displayInOrder();
+
+    cout << "\ndisplaying post order\n";
+    binaryNumber.displayPostOrder();
+    
+    cout << "\ndisplaying pre order\n";
+    binaryNumber.displayPreOrder();
+}
 
 /**
  * This function inserts new value to the binary tree.
@@ -28,7 +110,7 @@ void IntBinaryTree::insertNode(int number)
  */
 void IntBinaryTree::insert(TreeNode *&nodePtr, TreeNode *&newNode)
 {
-    if (nodePtr == nullPtr)
+    if (nodePtr == nullptr)
         nodePtr = newNode;
     else if (newNode->value < nodePtr->value)
         insert(nodePtr->left, newNode);
@@ -51,8 +133,8 @@ void IntBinaryTree::displayPreOrder(TreeNode *nodePtr) const
     if (nodePtr)
     {
         cout << nodePtr->value << endl;
-        displayInOrder(nodePtr->left);
-        displayInOrder(nodePtr->right);
+        displayPreOrder(nodePtr->left);
+        displayPreOrder(nodePtr->right);
     }
 }
 
@@ -62,11 +144,11 @@ void IntBinaryTree::displayPostOrder(TreeNode *nodePtr) const
     {
         displayPostOrder(nodePtr->left);
         displayPostOrder(nodePtr->right);
-        cout << nodePtr->value << ednl;
+        cout << nodePtr->value << endl;
     }
 }
 
-void IntBinaryTree::searchNode(int number)
+bool IntBinaryTree::searchNode(int number)
 {
     TreeNode *nodePtr = root;
 
@@ -89,10 +171,10 @@ void IntBinaryTree::remove(int number)
 
 void IntBinaryTree::deleteNode(int number, TreeNode *&nodePtr)
 {
-    if (num < nodePtr->value)
-        deleteNode(num, nodePtr->left);
-    else if (num > nodePtr->value)
-        deleteNode(num, nodePtr->right);
+    if (number < nodePtr->value)
+        deleteNode(number, nodePtr->left);
+    else if (number > nodePtr->value)
+        deleteNode(number, nodePtr->right);
     else
         makeDeletion(nodePtr);
 }
@@ -122,7 +204,7 @@ void IntBinaryTree::makeDeletion(TreeNode *&nodePtr)
         while (tempNodePtr->left)
             tempNodePtr = tempNodePtr->left;
 
-        tempNodePtr.left = nodePtr->left;
+        tempNodePtr->left = nodePtr->left;
         tempNodePtr = nodePtr;
         nodePtr = nodePtr->right;
 

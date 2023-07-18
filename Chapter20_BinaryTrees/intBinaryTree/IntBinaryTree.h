@@ -14,7 +14,7 @@ private:
     TreeNode *root;
 
     void insert(TreeNode *&, TreeNode *&);
-    void destroySubTree(TreeNode *);
+    void destroySubTree(TreeNode *&);
     void deleteNode(int, TreeNode * &);
     void makeDeletion(TreeNode *&);
     void displayInOrder(TreeNode *) const;
