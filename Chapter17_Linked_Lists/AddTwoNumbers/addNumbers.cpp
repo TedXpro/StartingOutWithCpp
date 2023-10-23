@@ -2,36 +2,36 @@
 
 using namespace std;
 
-struct LinkedNode
+struct ListNode
 {
     int val;
-    LinkedNode *next;
+    ListNode *next;
 };
 
-LinkedNode *addValue(int value)
+ListNode *addValue(int value)
 {
-    LinkedNode *newNode = new LinkedNode;
+    ListNode *newNode = new ListNode;
     newNode->val = value;
     newNode->next = nullptr;
     return newNode;
 }
 
-LinkedNode *addNumbers(LinkedNode *, LinkedNode *);
-void display(LinkedNode *nodeptr);
+ListNode *addNumbers(ListNode *, ListNode *);
+void display(ListNode *nodeptr);
 
 int main()
 {
-    LinkedNode *l1 = addValue(2);
+    ListNode *l1 = addValue(2);
     l1->next = addValue(4);
     l1->next->next = addValue(3);
     cout << "L1 complete\n";
 
-    LinkedNode *l2 = addValue(5);
+    ListNode *l2 = addValue(5);
     l2->next = addValue(6);
     l2->next->next = addValue(7);
     cout << "L2 complete\n";
 
-    LinkedNode *answer = addNumbers(l1, l2);
+    ListNode *answer = addNumbers(l1, l2);
     cout << "Answer Complete\n";
 
     display(l1);
@@ -41,13 +41,13 @@ int main()
     display(answer);
 }
 
-LinkedNode *addNumbers(LinkedNode *l1, LinkedNode *l2)
+ListNode *addNumbers(ListNode *l1, ListNode *l2)
 {
-    LinkedNode *answer = new LinkedNode;
-    LinkedNode *ansPtr = answer;
+    ListNode *answer = new ListNode;
+    ListNode *ansPtr = answer;
 
-    LinkedNode *ptr1 = l1;
-    LinkedNode *ptr2 = l2;
+    ListNode *ptr1 = l1;
+    ListNode *ptr2 = l2;
 
     int rem = 0;
 
@@ -129,15 +129,15 @@ LinkedNode *addNumbers(LinkedNode *l1, LinkedNode *l2)
         ansPtr = ansPtr->next;
     }
 
-    LinkedNode *temp = answer;
+    ListNode *temp = answer;
     answer = answer->next;
     delete temp;
     return answer;
 }
 
-void display(LinkedNode *nodeptr)
+void display(ListNode *nodeptr)
 {
-    LinkedNode *ptr = nodeptr;
+    ListNode *ptr = nodeptr;
 
     while (ptr != nullptr)
     {
