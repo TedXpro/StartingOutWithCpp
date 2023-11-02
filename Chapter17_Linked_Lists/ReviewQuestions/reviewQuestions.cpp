@@ -147,15 +147,16 @@ void LinkedList::addValue(int number)
 
 void LinkedList::reverse()
 {
-    ListNode *reverseHead ;
+    ListNode *reverseHead;
 
     ListNode *nodeptr = head;
-    while(nodeptr){
+    while (nodeptr)
+    {
         ListNode *newNode = new ListNode;
         newNode->value = nodeptr->value;
         newNode->next = reverseHead;
         reverseHead = newNode;
-        
+
         nodeptr = nodeptr->next;
     }
 
@@ -163,7 +164,8 @@ void LinkedList::reverse()
     cout << "The Original Linked List\n";
     displayValues();
     cout << "The Reversed Linked List\n";
-    while(reversePtr){
+    while (reversePtr)
+    {
         cout << reversePtr->value << " -> ";
         reversePtr = reversePtr->next;
     }
