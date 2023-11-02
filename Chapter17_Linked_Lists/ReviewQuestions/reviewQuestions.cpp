@@ -26,6 +26,7 @@ public:
     void displayValues() const;
     void addValue(int);
     void deleteValue(int);
+    void reverse();
 };
 
 LinkedList::~LinkedList()
@@ -144,13 +145,38 @@ void LinkedList::addValue(int number)
     // }
 }
 
+void LinkedList::reverse()
+{
+    ListNode *reverseHead ;
+
+    ListNode *nodeptr = head;
+    while(nodeptr){
+        ListNode *newNode = new ListNode;
+        newNode->value = nodeptr->value;
+        newNode->next = reverseHead;
+        reverseHead = newNode;
+        
+        nodeptr = nodeptr->next;
+    }
+
+    ListNode *reversePtr = reverseHead;
+    cout << "The Original Linked List\n";
+    displayValues();
+    cout << "The Reversed Linked List\n";
+    while(reversePtr){
+        cout << reversePtr->value << " -> ";
+        reversePtr = reversePtr->next;
+    }
+    cout << endl;
+}
+
 void LinkedList::displayValues() const
 {
     ListNode *nodePtr = head;
 
     while (nodePtr != nullptr)
     {
-        cout << nodePtr->value << " ";
+        cout << nodePtr->value << " -> ";
         nodePtr = nodePtr->next;
     }
     cout << endl;
@@ -195,6 +221,9 @@ int main()
     numberList.addValue(1);
     numberList.displayValues();
     numberList.addValue(0);
+    numberList.displayValues();
+
+    numberList.reverse();
     numberList.displayValues();
     // numberList.deleteValue(100);
     // numberList.displayValues();
