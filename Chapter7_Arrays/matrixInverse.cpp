@@ -168,7 +168,7 @@ void displayResult(vector<vector<int>> inverse, int deter)
     for (int i = 0; i < ROW; i++)
     {
         for (int j = 0; j < COL; j++)
-            cout << inverse[i][j] << "/" << deter << " ";
+            cout << inverse[i][j] / deter << " ";
         cout << endl;
     }
 }
