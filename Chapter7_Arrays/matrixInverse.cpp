@@ -1,19 +1,20 @@
 /*This program will find the inverse of a matrix from
-a matrix given by the user.*/
+a matrix given by the user.
+This Solution works on c++11*/
 #include <iostream>
 #include <vector>
 
 using namespace std;
 
-// Global Constant
+// Global Constant to hold the Column and row sizes of the given matrix.
 const int COL = 3;
 const int ROW = 3;
 
 void acceptNumbers(int[ROW][COL]);
 vector<vector<int>> findNums(int[][COL], int, int);
 int findDeterminant(vector<vector<int>>);
-void findTranspose(vector<vector<int>>);
-void displayResult(vector<vector<int>>, int);
+vector<vector<int>> findTranspose(vector<vector<int>>);
+void displayResult(vector<vector<int>>, double);
 
 int main()
 {
@@ -39,6 +40,7 @@ int main()
     // }
     // cout << determinant << endl;
 
+
     int determinant;
     int ele1 = (matrix[0][0]) * ((matrix[1][1] * matrix[2][2]) - (matrix[2][1] * matrix[1][2]));
     int ele2 = -(matrix[0][1]) * ((matrix[1][0] * matrix[2][2]) - (matrix[2][0] * matrix[1][2]));
@@ -61,12 +63,13 @@ int main()
             det = findNums(matrix, i, j);
             if ((i + j) % 2 == 0)
                 adj.push_back(findDeterminant(det));
-            else
+            else // if the entries are odd make the entrie negative.
                 adj.push_back(-findDeterminant(det));
         }
         adjoint.push_back(adj);
     }
-    findTranspose(adjoint);
+    // finding the transpose of the adjoint matrix.
+    adjoint = findTranspose(adjoint);
     displayResult(adjoint, determinant);
 }
 
@@ -134,26 +137,19 @@ int findDeterminant(vector<vector<int>> numbers)
  *
  * @return the transposed matrix.
  */
-void findTranspose(vector<vector<int>> transpose)
+vector<vector<int>> findTranspose(vector<vector<int>> transpose)
 {
     vector<vector<int>> numbers;
     for (int i = 0; i < ROW; i++)
     {
         vector<int> nums;
         for (int j = 0; j < COL; j++)
-            nums.push_back(transpose[i][j]);
+            nums.push_back(transpose[j][i]);
 
         numbers.push_back(nums);
     }
 
-    for (int i = 0; i < ROW; i++)
-    {
-        vector<int> trans;
-        for (int j = 0; j < COL; j++)
-            trans.push_back(numbers[j][i]);
-
-        transpose.push_back(trans);
-    }
+    return numbers;
 }
 
 /**
@@ -162,13 +158,21 @@ void findTranspose(vector<vector<int>> transpose)
  * @param inverse will hold the inverse matrix.
  * @param deter will hold the value of the determinant of the matrix.
  */
-void displayResult(vector<vector<int>> inverse, int deter)
+void displayResult(vector<vector<int>> inverse, double deter)
 {
+    vector<vector<double>> result;
+    for (int i = 0; i < ROW; i++){
+        vector<double> res;
+        for (int j = 0; j < COL; j++)
+            res.push_back(inverse[i][j] / deter);
+        result.push_back(res);
+    }
+
     cout << "The inverse of the matrix is:\n";
     for (int i = 0; i < ROW; i++)
     {
         for (int j = 0; j < COL; j++)
-            cout << inverse[i][j] / deter << " ";
+            cout << result[i][j] << " ";
         cout << endl;
     }
 }
