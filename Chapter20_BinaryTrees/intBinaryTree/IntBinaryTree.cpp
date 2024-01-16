@@ -23,17 +23,20 @@ private:
     void displayPreOrder(TreeNode *) const;
     void displayPostOrder(TreeNode *) const;
 
-    void search(int num, TreeNode *nodeptr, bool &status){
-        if(nodeptr == nullptr)
+    void search(int num, TreeNode *nodeptr, bool &status)
+    {
+        if (nodeptr == nullptr)
             return;
-        else if(nodeptr->value == num){
+        else if (nodeptr->value == num)
+        {
             status = true;
         }
-        else if(nodeptr->value > num)
+        else if (nodeptr->value > num)
             search(num, nodeptr->left, status);
         else
             search(num, nodeptr->right, status);
     }
+
 public:
     IntBinaryTree()
     {
@@ -48,15 +51,18 @@ public:
     void insertNode(int);
     // bool searchNode(int);
     void remove(int);
-    void displayInOrder() 
+    
+    void displayInOrder() const
     {
-        if(root == nullptr)
+        if (root == nullptr)
             return;
         TreeNode *current = root;
-        stack<TreeNode*> s;
+        stack<TreeNode *> s;
 
-        while(current != nullptr || !s.empty()){
-            while(current != nullptr){
+        while (current != nullptr || !s.empty())
+        {
+            while (current != nullptr)
+            {
                 s.push(current);
                 current = current->left;
             }
@@ -66,37 +72,61 @@ public:
             cout << current->value << " ";
             current = current->right;
         }
-
     }
 
-    void displayPreOrder() 
+    void displayPreOrder() const
     {
-        if(root == nullptr)
+        if (root == nullptr)
             return;
         stack<TreeNode *> s;
         s.push(root);
 
-        while(!s.empty()){
+        while (!s.empty())
+        {
             TreeNode *current = s.top();
             s.pop();
             cout << current->value << " ";
 
-            if(current->right != nullptr)
+            if (current->right != nullptr)
                 s.push(current->right);
-            if(current->left != nullptr)
+            if (current->left != nullptr)
                 s.push(current->left);
         }
-        
 
         // displayPreOrder(root);
     }
 
     void displayPostOrder() const
     {
-        displayPostOrder(root);
+        if (root == nullptr)
+            return;
+        stack<TreeNode *> s1;
+        stack<TreeNode * > s2;
+        s1.push(root);
+        while (!s1.empty())
+        {
+            TreeNode *current = s1.top();
+            s1.pop();
+            s2.push(current);
+
+            if (current->left)
+                s1.push(current->left);
+
+            if(current->right)
+                s1.push(current->right);
+        }
+
+        while(!s2.empty()){
+            TreeNode *curr = s2.top();
+            s2.pop();
+            cout << curr->value << " ";
+        }
+
+        // displayPostOrder(root);
     }
 
-    bool searchNode(int num){
+    bool searchNode(int num)
+    {
         bool status = false;
         search(num, root, status);
 
@@ -113,21 +143,21 @@ int main()
     cout << "hello\n";
 
     binaryNumber.insertNode(5);
-    binaryNumber.insertNode(2);
-    binaryNumber.insertNode(1);
-    binaryNumber.insertNode(4);
     binaryNumber.insertNode(3);
-    binaryNumber.insertNode(8);
     binaryNumber.insertNode(7);
+    binaryNumber.insertNode(4);
+    binaryNumber.insertNode(1);
+    binaryNumber.insertNode(2);
+    binaryNumber.insertNode(0);
+    binaryNumber.insertNode(6);
+    binaryNumber.insertNode(9);
+    binaryNumber.insertNode(8);
     binaryNumber.insertNode(11);
-    binaryNumber.insertNode(13);
-    binaryNumber.insertNode(20);
-    binaryNumber.insertNode(12);
- 
+
     cout << "\ndisplaying in order\n";
     binaryNumber.displayInOrder();
     cout << endl;
-    binaryNumber.remove(0);
+    // binaryNumber.remove(0);
     // binaryNumber.insertNode(0);
     cout << "\ndisplaying in order\n";
     binaryNumber.displayInOrder();
@@ -141,7 +171,7 @@ int main()
     binaryNumber.displayPreOrder();
     cout << endl;
 
-    if(binaryNumber.searchNode(20))
+    if (binaryNumber.searchNode(0))
         cout << "the value exists in a tree.\n";
     else
         cout << "The value doesnt exist in a tree.\n";
@@ -188,7 +218,6 @@ void IntBinaryTree::displayInOrder(TreeNode *nodePtr) const
         cout << nodePtr->value << " ";
         displayInOrder(nodePtr->right);
     }
-
 }
 
 void IntBinaryTree::displayPreOrder(TreeNode *nodePtr) const
@@ -234,7 +263,8 @@ void IntBinaryTree::remove(int number)
 
 void IntBinaryTree::deleteNode(int number, TreeNode *&nodePtr)
 {
-    if(nodePtr == nullptr){
+    if (nodePtr == nullptr)
+    {
         cout << "the value doesnt exist in the tree.\n";
         return;
     }
@@ -277,14 +307,14 @@ void IntBinaryTree::makeDeletion(TreeNode *&nodePtr)
     }
 }
 
-void IntBinaryTree::destroySubTree(TreeNode *& nodePtr)
+void IntBinaryTree::destroySubTree(TreeNode *&nodePtr)
 {
-    if(nodePtr)
+    if (nodePtr)
     {
-        if(nodePtr->left)
+        if (nodePtr->left)
             destroySubTree(nodePtr->left);
-        if(nodePtr->right)
+        if (nodePtr->right)
             destroySubTree(nodePtr->right);
-        delete nodePtr;     
+        delete nodePtr;
     }
 }
