@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stack>
 
 using namespace std;
 
@@ -22,6 +23,17 @@ private:
     void displayPreOrder(TreeNode *) const;
     void displayPostOrder(TreeNode *) const;
 
+    void search(int num, TreeNode *nodeptr, bool &status){
+        if(nodeptr == nullptr)
+            return;
+        else if(nodeptr->value == num){
+            status = true;
+        }
+        else if(nodeptr->value > num)
+            search(num, nodeptr->left, status);
+        else
+            search(num, nodeptr->right, status);
+    }
 public:
     IntBinaryTree()
     {
@@ -34,29 +46,71 @@ public:
     }
 
     void insertNode(int);
-    bool searchNode(int);
+    // bool searchNode(int);
     void remove(int);
-    void displayInOrder() const
+    void displayInOrder() 
     {
-        displayInOrder(root);
+        if(root == nullptr)
+            return;
+        TreeNode *current = root;
+        stack<TreeNode*> s;
+
+        while(current != nullptr || !s.empty()){
+            while(current != nullptr){
+                s.push(current);
+                current = current->left;
+            }
+
+            current = s.top();
+            s.pop();
+            cout << current->value << " ";
+            current = current->right;
+        }
+
     }
 
-    void displayPreOrder() const
+    void displayPreOrder() 
     {
-        displayPreOrder(root);
+        if(root == nullptr)
+            return;
+        stack<TreeNode *> s;
+        s.push(root);
+
+        while(!s.empty()){
+            TreeNode *current = s.top();
+            s.pop();
+            cout << current->value << " ";
+
+            if(current->right != nullptr)
+                s.push(current->right);
+            if(current->left != nullptr)
+                s.push(current->left);
+        }
+        
+
+        // displayPreOrder(root);
     }
 
     void displayPostOrder() const
     {
         displayPostOrder(root);
     }
+
+    bool searchNode(int num){
+        bool status = false;
+        search(num, root, status);
+
+        return status;
+    }
 };
 
 int main()
 {
     IntBinaryTree binaryNumber;
+    cout << "hello\n";
 
     binaryNumber.remove(0);
+    cout << "hello\n";
 
     binaryNumber.insertNode(5);
     binaryNumber.insertNode(2);
@@ -72,17 +126,25 @@ int main()
  
     cout << "\ndisplaying in order\n";
     binaryNumber.displayInOrder();
- 
+    cout << endl;
     binaryNumber.remove(0);
     // binaryNumber.insertNode(0);
     cout << "\ndisplaying in order\n";
     binaryNumber.displayInOrder();
+    cout << endl;
 
     cout << "\ndisplaying post order\n";
     binaryNumber.displayPostOrder();
-    
+    cout << endl;
+
     cout << "\ndisplaying pre order\n";
     binaryNumber.displayPreOrder();
+    cout << endl;
+
+    if(binaryNumber.searchNode(20))
+        cout << "the value exists in a tree.\n";
+    else
+        cout << "The value doesnt exist in a tree.\n";
 }
 
 /**
@@ -123,16 +185,17 @@ void IntBinaryTree::displayInOrder(TreeNode *nodePtr) const
     if (nodePtr)
     {
         displayInOrder(nodePtr->left);
-        cout << nodePtr->value << endl;
+        cout << nodePtr->value << " ";
         displayInOrder(nodePtr->right);
     }
+
 }
 
 void IntBinaryTree::displayPreOrder(TreeNode *nodePtr) const
 {
     if (nodePtr)
     {
-        cout << nodePtr->value << endl;
+        cout << nodePtr->value << " ";
         displayPreOrder(nodePtr->left);
         displayPreOrder(nodePtr->right);
     }
@@ -144,25 +207,25 @@ void IntBinaryTree::displayPostOrder(TreeNode *nodePtr) const
     {
         displayPostOrder(nodePtr->left);
         displayPostOrder(nodePtr->right);
-        cout << nodePtr->value << endl;
+        cout << nodePtr->value << " ";
     }
 }
 
-bool IntBinaryTree::searchNode(int number)
-{
-    TreeNode *nodePtr = root;
+// bool IntBinaryTree::searchNode(int number)
+// {
+//     TreeNode *nodePtr = root;
 
-    while (nodePtr)
-    {
-        if (nodePtr->value == number)
-            return false;
-        else if (nodePtr->value < number)
-            nodePtr = nodePtr->left;
-        else
-            nodePtr = nodePtr->right;
-    }
-    return false;
-}
+//     while (nodePtr)
+//     {
+//         if (nodePtr->value == number)
+//             return true;
+//         else if (nodePtr->value < number)
+//             nodePtr = nodePtr->left;
+//         else
+//             nodePtr = nodePtr->right;
+//     }
+//     return false;
+// }
 
 void IntBinaryTree::remove(int number)
 {
@@ -171,7 +234,11 @@ void IntBinaryTree::remove(int number)
 
 void IntBinaryTree::deleteNode(int number, TreeNode *&nodePtr)
 {
-    if (number < nodePtr->value)
+    if(nodePtr == nullptr){
+        cout << "the value doesnt exist in the tree.\n";
+        return;
+    }
+    else if (number < nodePtr->value)
         deleteNode(number, nodePtr->left);
     else if (number > nodePtr->value)
         deleteNode(number, nodePtr->right);
@@ -183,9 +250,7 @@ void IntBinaryTree::makeDeletion(TreeNode *&nodePtr)
 {
     TreeNode *tempNodePtr = nullptr;
 
-    if (nodePtr == nullptr)
-        cout << "Cannot delete empty node.\n";
-    else if (nodePtr->right == nullptr)
+    if (nodePtr->right == nullptr)
     {
         tempNodePtr = nodePtr;
         nodePtr = nodePtr->left;
