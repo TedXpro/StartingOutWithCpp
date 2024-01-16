@@ -51,7 +51,7 @@ public:
     void insertNode(int);
     // bool searchNode(int);
     void remove(int);
-    
+
     void displayInOrder() const
     {
         if (root == nullptr)
@@ -243,7 +243,6 @@ void IntBinaryTree::displayPostOrder(TreeNode *nodePtr) const
 // bool IntBinaryTree::searchNode(int number)
 // {
 //     TreeNode *nodePtr = root;
-
 //     while (nodePtr)
 //     {
 //         if (nodePtr->value == number)
@@ -272,7 +271,7 @@ void IntBinaryTree::deleteNode(int number, TreeNode *&nodePtr)
         deleteNode(number, nodePtr->left);
     else if (number > nodePtr->value)
         deleteNode(number, nodePtr->right);
-    else
+    else // when the nodes values are equal.
         makeDeletion(nodePtr);
 }
 
@@ -284,17 +283,15 @@ void IntBinaryTree::makeDeletion(TreeNode *&nodePtr)
     {
         tempNodePtr = nodePtr;
         nodePtr = nodePtr->left;
-        delete tempNodePtr;
     }
     else if (nodePtr->left == nullptr)
     {
         tempNodePtr = nodePtr;
         nodePtr = nodePtr->right;
-        delete tempNodePtr;
     }
     else
     {
-        tempNodePtr = nodePtr->right;
+        tempNodePtr = nodePtr->right; // s1
 
         while (tempNodePtr->left)
             tempNodePtr = tempNodePtr->left;
@@ -302,9 +299,8 @@ void IntBinaryTree::makeDeletion(TreeNode *&nodePtr)
         tempNodePtr->left = nodePtr->left;
         tempNodePtr = nodePtr;
         nodePtr = nodePtr->right;
-
-        delete tempNodePtr;
     }
+    delete tempNodePtr;
 }
 
 void IntBinaryTree::destroySubTree(TreeNode *&nodePtr)
